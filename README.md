@@ -6,6 +6,9 @@ In order to block malware and ads, we null-route domains which are known to serv
 
 This script downloads blocklists, parses them for an /etc/hosts file, then uploads them to a DD-WRT router.
 
+An example of a crontab entry for this script is as follows:
+`30 * * * * cd /Users/user/router-blocklist && dns.sh >/dev/null 2>&1`
+
 ## Variables
 
 In `dns.sh`, there are various variables at the top of the file that need to be set.
@@ -27,3 +30,4 @@ This is because the alternative is saving the passcode to our SSH key somewhere 
 This script is run on a computer connected to the router, rather than the router itself, because my router does not have wget nor curl installed, and there is no way to easily download files from websites. Hence this hacky-solution!
 
 The SSH confirm `-oKexAlgorithms=+diffie-hellman-group1-sha1` is used because my router (and thus DD-WRT version) is extremely old.
+
