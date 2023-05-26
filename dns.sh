@@ -6,7 +6,7 @@ TEST_IP=1.2.3.4 # An IP which the TEST_DOM will only resolve to if the changes a
 PASSWORD=password # Password for our router
 
 [[ $(/Sy*/L*/Priv*/Apple8*/V*/C*/R*/airport -I | grep -w SSID | awk '{print $2}') == "$NETWORK" ]] || exit 0 #Only do this if we're connected to $NETWORK
-[[ $(nslookup "$TEST_DOM") =~ "$TEST_IP" ]] && exit 0 #If $TEST_DOM already resolves to $TEST_IP, there's nothing for us to do.
+[[ $(dig @192.168.1.1 +short "$TEST_DOM") == "$TEST_IP" ]] && exit 0 #If $TEST_DOM already resolves to $TEST_IP, there's nothing for us to do.
 [ -f /tmp/dns.tmp ] && exit 0 #Already running, probably means something is wrong with our network.
 
 touch /tmp/dns.tmp
